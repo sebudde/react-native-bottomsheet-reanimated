@@ -40,6 +40,7 @@ class BottomPanel extends Component {
     this._deltaY = new Animated.Value(Screen.height);
     this.snapToIndex = 0;
     this.state = {
+      dragEnabled: true,
       scrollValueY: new Animated.Value(0),
       isDismissWithPress: props.isBackDropDismissByPress
         ? props.isBackDropDismissByPress
@@ -73,6 +74,10 @@ class BottomPanel extends Component {
 
   snapTo = (index) => {
     this.refs.bottomPanel.snapTo({ index });
+  };
+
+  setDragEnabled = (boolean) => {
+    this.setState({ dragEnabled: boolean });
   };
 
   render() {
@@ -131,7 +136,7 @@ class BottomPanel extends Component {
         )}
 
         <Interactable.View
-          dragEnabled={isModal ? false : true}
+          dragEnabled={(isModal ? false : true) && this.state.dragEnabled}
           verticalOnly={true}
           ref="bottomPanel"
           snapPoints={snapPoints}
