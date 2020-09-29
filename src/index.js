@@ -53,6 +53,9 @@ class BottomPanel extends Component {
   onDrawerSnap = (snap) => {
     const { snapPoints } = this.props;
     this.snapToIndex = snap.nativeEvent.index;
+    if (this.props.onSnap) {
+      this.props.onSnap(snap.nativeEvent.index, snap.nativeEvent.y);
+    }
     if (
       snapPoints[snap.nativeEvent.index] === 0 ||
       snapPoints[snap.nativeEvent.index] === '0%'
